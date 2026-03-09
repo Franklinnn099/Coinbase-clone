@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(curl -s \"https://api.coingecko.com/api/v3/coins/markets?vs_currency=ghs&ids=bitcoin,ethereum,tether,binancecoin,ripple,usd-coin&order=market_cap_desc&sparkline=false&price_change_percentage=24h\")",
+      "Bash(curl -s \"https://api.coingecko.com/api/v3/simple/supported_vs_currencies\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\([x for x in d if ''gh'' in x.lower\\(\\)]\\)\")",
+      "Bash(curl -s \"https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd\")",
+      "Bash(curl -s \"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,tether,binancecoin,ripple,usd-coin&order=market_cap_desc&sparkline=false&price_change_percentage=24h\")"
+    ]
+  }
+}

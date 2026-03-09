@@ -1,5 +1,5 @@
 import React from 'react';
-import ctaGraphic from '../../../images/image.jpg';
+import ctaGraphic from '../../../images/crypto icona.png';
 
 const CtaBanner = () => {
   return (

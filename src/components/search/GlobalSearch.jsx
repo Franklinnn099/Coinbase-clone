@@ -175,7 +175,7 @@ const GlobalSearch = () => {
     <div className="relative flex justify-end" ref={searchContainerRef}>
       
       {/* Target state on Desktop: Either the Icon button OR the Expanded Input */}
-      <div className="hidden md:flex relative h-9 items-center justify-end">
+      <div className="hidden md:flex relative h-10 items-center justify-end">
         
         {/* We absolutely position the icon button ON TOP of the input so it doesn't leave flow gaps */}
         <div className={`absolute right-0 transition-opacity duration-200 ${isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100 z-10'}`}>

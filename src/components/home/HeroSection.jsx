@@ -8,9 +8,9 @@ const HeroSection = () => {
         
         {/* Left Side - Image (as seen in screenshot) */}
         <div className="w-full md:w-1/2 flex justify-start">
-          <img 
-            src={heroImage} 
-            alt="Coinbase App Interface" 
+          <img
+            src={heroImage}
+            alt="Coinbase App Interface"
             className="w-full max-w-[540px] h-auto object-contain rounded-3xl"
           />
         </div>

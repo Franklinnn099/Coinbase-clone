@@ -8,6 +8,7 @@ import AssetDetail from './pages/AssetDetail';
 import Learn from './pages/Learn';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import SignUpAccountType from './pages/SignUpAccountType';
 import Individuals from './pages/Individuals';
 import Businesses from './pages/Businesses';
 import Institutions from './pages/Institutions';
@@ -41,6 +42,11 @@ function App() {
         {/* Dedicated CDS sandbox area */}
         <Route path="/cds-demo" element={<CdsViteApp />} />
 
+        {/* Auth pages — standalone dark layout, no Navbar/Footer */}
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUpAccountType />} />
+        <Route path="/signup/create" element={<SignUp />} />
+
         {/* Global Marketing Site */}
         <Route element={<MarketingLayout />}>
           <Route path="/" element={<Home />} />
@@ -58,8 +64,6 @@ function App() {
           <Route path="/legal" element={<Legal />} />
           <Route path="/asset/:id" element={<AssetDetail />} />
           <Route path="/learn" element={<Learn />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
         </Route>
       </Routes>
     </Router>

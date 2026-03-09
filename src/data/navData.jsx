@@ -1,12 +1,22 @@
-import React from 'react';
-import { 
-  FiSearch, FiTrendingUp, FiStar, FiGrid,
-  FiBriefcase, FiCreditCard, FiSmartphone, FiShield,
-  FiBookOpen, FiCode, FiLayers, FiDollarSign,
-  FiUsers, FiHeart, FiHelpCircle, FiCoffee,
-  FiLock, FiActivity, FiCpu, FiTrendingDown, FiPieChart, FiGlobe, FiDatabase
+import {
+  FiActivity,
+  FiBookOpen,
+  FiBriefcase,
+  FiCode,
+  FiCompass,
+  FiCreditCard,
+  FiDollarSign,
+  FiGlobe,
+  FiGrid,
+  FiLayers,
+  FiLifeBuoy,
+  FiLock,
+  FiPieChart,
+  FiShield,
+  FiStar,
+  FiTrendingUp,
+  FiUsers,
 } from 'react-icons/fi';
-
 import { FaBitcoin, FaEthereum } from 'react-icons/fa';
 import { SiSolana } from 'react-icons/si';
 
@@ -18,192 +28,437 @@ import navDevelopersImg from '../images/nav_developers.png';
 import navCompanyImg from '../images/nav_company.png';
 
 const ICONS = {
-  search: <FiSearch size={18} />,
-  trendingUp: <FiTrendingUp size={18} />,
-  star: <FiStar size={18} />,
-  grid: <FiGrid size={18} />,
-  briefcase: <FiBriefcase size={18} />,
-  creditCard: <FiCreditCard size={18} />,
-  smartphone: <FiSmartphone size={18} />,
-  shield: <FiShield size={18} />,
-  book: <FiBookOpen size={18} />,
-  code: <FiCode size={18} />,
-  layers: <FiLayers size={18} />,
-  dollar: <FiDollarSign size={18} />,
-  users: <FiUsers size={18} />,
-  heart: <FiHeart size={18} />,
-  help: <FiHelpCircle size={18} />,
-  coffee: <FiCoffee size={18} />,
-  lock: <FiLock size={18} />,
-  activity: <FiActivity size={18} />,
-  cpu: <FiCpu size={18} />,
-  pie: <FiPieChart size={18} />,
-  globe: <FiGlobe size={18} />,
-  database: <FiDatabase size={18} />,
-  bitcoin: <FaBitcoin size={18} />,
-  ethereum: <FaEthereum size={18} />,
-  solana: <SiSolana size={18} />,
-  usdc: <FiDollarSign size={18} />,
+  explore: FiCompass,
+  trending: FiTrendingUp,
+  assets: FiPieChart,
+  recent: FiStar,
+  buySell: FiActivity,
+  wallet: FiGrid,
+  trade: FiTrendingUp,
+  one: FiShield,
+  card: FiCreditCard,
+  earn: FiDollarSign,
+  learn: FiBookOpen,
+  business: FiBriefcase,
+  payments: FiDollarSign,
+  listings: FiPieChart,
+  token: FiLayers,
+  protocol: FiGlobe,
+  prime: FiShield,
+  custody: FiLock,
+  execution: FiActivity,
+  liquidity: FiLayers,
+  exchange: FiTrendingUp,
+  platform: FiCode,
+  base: FiLayers,
+  sdk: FiGrid,
+  onramp: FiDollarSign,
+  api: FiCode,
+  docs: FiBookOpen,
+  demos: FiCompass,
+  about: FiUsers,
+  careers: FiBriefcase,
+  affiliates: FiStar,
+  support: FiLifeBuoy,
+  blog: FiBookOpen,
+  security: FiLock,
+  bitcoin: FaBitcoin,
+  ethereum: FaEthereum,
+  solana: SiSolana,
+  usdc: FiDollarSign,
 };
+
+export const DEFAULT_ACTIVE_NAV = 'Businesses';
 
 export const navData = [
   {
-    label: "Explore", // Or Cryptocurrencies, using Explore to map to the project's state
-    href: "/explore",
+    label: 'Cryptocurrencies',
+    href: '/explore',
     dropdown: {
-      columns: [
-        [
-          { title: "Explore", description: "Browse crypto prices and market trends", href: "/explore", icon: ICONS.search },
-          { title: "Trending", description: "See top movers and trending assets", href: "/explore", icon: ICONS.trendingUp },
-          { title: "New assets", description: "Discover recently listed assets", href: "/explore", icon: ICONS.star },
-          { title: "Categories", description: "Explore crypto by category", href: "/explore", icon: ICONS.grid }
-        ],
-        [
-          { title: "Bitcoin", description: "View Bitcoin price and details", href: "/asset/btc", icon: ICONS.bitcoin },
-          { title: "Ethereum", description: "View Ethereum price and details", href: "/asset/eth", icon: ICONS.ethereum },
-          { title: "Solana", description: "View Solana price and details", href: "/asset/sol", icon: ICONS.solana },
-          { title: "USDC", description: "View USDC price and details", href: "/asset/usdc", icon: ICONS.usdc }
-        ]
-      ],
       promo: {
-        headline: "Explore the crypto market",
-        cta: "Explore now",
-        href: "/explore",
-        bgColor: "bg-[#0A0B0D]",
-        textColor: "text-white",
-        image: navExploreImg
-      }
-    }
+        eyebrow: 'Markets',
+        headline: 'Explore crypto markets',
+        cta: 'Browse assets',
+        href: '/explore',
+        image: navExploreImg,
+        imageAlt: 'Cryptocurrency market visuals',
+      },
+      sections: [
+        {
+          title: 'Discover',
+          items: [
+            {
+              title: 'Explore',
+              description: 'Browse prices, charts, and market activity.',
+              href: '/explore',
+              icon: ICONS.explore,
+            },
+            {
+              title: 'Top movers',
+              description: 'Track the strongest gainers across the market.',
+              href: '/explore',
+              icon: ICONS.trending,
+            },
+            {
+              title: 'Tradable assets',
+              description: 'See the cryptocurrencies available on Coinbase.',
+              href: '/explore',
+              icon: ICONS.assets,
+            },
+            {
+              title: 'New on Coinbase',
+              description: 'Follow the latest assets added to the platform.',
+              href: '/explore',
+              icon: ICONS.recent,
+            },
+          ],
+        },
+        {
+          title: 'Popular assets',
+          items: [
+            {
+              title: 'Bitcoin',
+              description: 'View Bitcoin price, history, and market data.',
+              href: '/asset/btc',
+              icon: ICONS.bitcoin,
+            },
+            {
+              title: 'Ethereum',
+              description: 'View Ethereum price, history, and market data.',
+              href: '/asset/eth',
+              icon: ICONS.ethereum,
+            },
+            {
+              title: 'Solana',
+              description: 'View Solana price, history, and market data.',
+              href: '/asset/sol',
+              icon: ICONS.solana,
+            },
+            {
+              title: 'USDC',
+              description: 'View USDC price, supply, and market details.',
+              href: '/asset/usdc',
+              icon: ICONS.usdc,
+            },
+          ],
+        },
+      ],
+    },
   },
   {
-    label: "Individuals",
-    href: "/individuals",
+    label: 'Individuals',
+    href: '/individuals',
     dropdown: {
-      columns: [
-        [
-          { title: "Buy & sell", description: "Manage personal crypto activity", href: "/individuals", icon: ICONS.activity },
-          { title: "Earn free crypto", description: "Educational rewards / earn", href: "/learn", icon: ICONS.star },
-          { title: "Coinbase One", description: "Membership benefits", href: "/individuals", icon: ICONS.shield },
-          { title: "Wallet", description: "Self-custody wallet experience", href: "/individuals", icon: ICONS.smartphone }
-        ],
-        [
-          { title: "Advanced Trade", description: "More powerful trading interface", href: "/individuals", icon: ICONS.trendingUp },
-          { title: "Debit Card", description: "Spend and earn with crypto-linked card", href: "/individuals", icon: ICONS.creditCard },
-          { title: "Base App", description: "Publish, earn, trade, discover apps", href: "/individuals", icon: ICONS.layers }
-        ]
-      ],
       promo: {
-        headline: "Get started with crypto",
-        cta: "Create account",
-        href: "/signup",
-        bgColor: "bg-[#0052FF]",
-        textColor: "text-white",
-        image: navIndividualsImg
-      }
-    }
+        eyebrow: 'Personal',
+        headline: 'Get started with crypto',
+        cta: 'Create account',
+        href: '/signup',
+        image: navIndividualsImg,
+        imageAlt: 'Coinbase consumer products preview',
+      },
+      sections: [
+        {
+          title: 'Products',
+          items: [
+            {
+              title: 'Buy and sell',
+              description: 'Trade crypto simply with an easy-to-use app.',
+              href: '/individuals',
+              icon: ICONS.buySell,
+            },
+            {
+              title: 'Wallet',
+              description: 'Access a self-custody wallet for Web3 apps.',
+              href: '/individuals/wallet',
+              icon: ICONS.wallet,
+            },
+            {
+              title: 'Advanced Trade',
+              description: 'Use more advanced trading tools and analytics.',
+              href: '/individuals',
+              icon: ICONS.trade,
+            },
+            {
+              title: 'Coinbase One',
+              description: 'Get premium benefits and member-only features.',
+              href: '/individuals',
+              icon: ICONS.one,
+            },
+          ],
+        },
+        {
+          title: 'More ways to start',
+          items: [
+            {
+              title: 'Card',
+              description: 'Spend with crypto and earn rewards back.',
+              href: '/individuals',
+              icon: ICONS.card,
+            },
+            {
+              title: 'Earn',
+              description: 'Learn about crypto and earn while you explore.',
+              href: '/learn',
+              icon: ICONS.earn,
+            },
+            {
+              title: 'Learn crypto basics',
+              description: 'Read beginner guides and market explainers.',
+              href: '/learn',
+              icon: ICONS.learn,
+            },
+          ],
+        },
+      ],
+    },
   },
   {
-    label: "Businesses",
-    href: "/businesses",
+    label: 'Businesses',
+    href: '/businesses',
     dropdown: {
-      columns: [
-        [
-          { title: "Coinbase Business", description: "Crypto operating account for modern companies", href: "/businesses", icon: ICONS.briefcase },
-          { title: "Payments", description: "Stablecoin payments stack for commerce platforms", href: "/businesses", icon: ICONS.dollar },
-          { title: "Asset Listings", description: "List your asset on Coinbase", href: "/businesses", icon: ICONS.pie }
-        ],
-        [
-          { title: "Token Manager", description: "Token distributions, vesting, and lockups", href: "/businesses", icon: ICONS.lock },
-          { title: "Commerce Payments Protocol", description: "Onchain payments standard", href: "/businesses", icon: ICONS.globe },
-          { title: "Prime", description: "Business trading and custody entry point", href: "/institutions", icon: ICONS.shield }
-        ]
-      ],
       promo: {
-        headline: "Move money globally",
-        cta: "Learn more",
-        href: "/businesses",
-        bgColor: "bg-[#0A0B0D]",
-        textColor: "text-white",
-        image: navBusinessesImg
-      }
-    }
+        eyebrow: 'Business',
+        headline: 'Crypto tools for modern companies',
+        cta: 'Learn more',
+        href: '/businesses',
+        image: navBusinessesImg,
+        imageAlt: 'Coinbase business products preview',
+      },
+      sections: [
+        {
+          title: 'Business solutions',
+          items: [
+            {
+              title: 'Coinbase Business',
+              description: 'Operate with a crypto account built for companies.',
+              href: '/businesses',
+              icon: ICONS.business,
+            },
+            {
+              title: 'Payments',
+              description: 'Accept fast, global stablecoin payments online.',
+              href: '/businesses',
+              icon: ICONS.payments,
+            },
+            {
+              title: 'Asset Listings',
+              description: 'List eligible digital assets on Coinbase markets.',
+              href: '/businesses',
+              icon: ICONS.listings,
+            },
+          ],
+        },
+        {
+          title: 'Infrastructure',
+          items: [
+            {
+              title: 'Token Manager',
+              description: 'Manage token operations, grants, and unlocks.',
+              href: '/businesses',
+              icon: ICONS.token,
+            },
+            {
+              title: 'Commerce Payments Protocol',
+              description: 'Use an open onchain standard for digital payments.',
+              href: '/businesses',
+              icon: ICONS.protocol,
+            },
+            {
+              title: 'Prime',
+              description: 'Access institutional trading and custody services.',
+              href: '/institutions',
+              icon: ICONS.prime,
+            },
+          ],
+        },
+      ],
+    },
   },
   {
-    label: "Institutions",
-    href: "/institutions",
+    label: 'Institutions',
+    href: '/institutions',
     dropdown: {
-      columns: [
-        [
-          { title: "Prime", description: "Institutional trading platform", href: "/institutions", icon: ICONS.shield },
-          { title: "Custody", description: "Secure digital asset storage", href: "/institutions", icon: ICONS.lock }
-        ],
-        [
-          { title: "Execution", description: "Trading execution infrastructure", href: "/institutions", icon: ICONS.activity },
-          { title: "Liquidity", description: "Deep pools of market access", href: "/institutions", icon: ICONS.database },
-          { title: "Exchange", description: "Direct access to Coinbase Exchange", href: "/institutions", icon: ICONS.trendingUp }
-        ]
-      ],
       promo: {
-        headline: "Institutional-grade crypto infrastructure",
-        cta: "Become a client",
-        href: "/institutions",
-        bgColor: "bg-[#1A1B1F]",
-        textColor: "text-white",
-        image: navInstitutionsImg
-      }
-    }
+        eyebrow: 'Institutional',
+        headline: 'Institutional-grade crypto infrastructure',
+        cta: 'Learn more',
+        href: '/institutions',
+        image: navInstitutionsImg,
+        imageAlt: 'Coinbase institutional products preview',
+      },
+      sections: [
+        {
+          title: 'Trading and custody',
+          items: [
+            {
+              title: 'Prime',
+              description: 'Trade, finance, and custody assets from one suite.',
+              href: '/institutions',
+              icon: ICONS.prime,
+            },
+            {
+              title: 'Custody',
+              description: 'Store digital assets with offline institutional security.',
+              href: '/institutions',
+              icon: ICONS.custody,
+            },
+            {
+              title: 'Execution',
+              description: 'Access smart order routing and execution tools.',
+              href: '/institutions',
+              icon: ICONS.execution,
+            },
+          ],
+        },
+        {
+          title: 'Market access',
+          items: [
+            {
+              title: 'Liquidity',
+              description: 'Connect to deep pools of crypto market liquidity.',
+              href: '/institutions',
+              icon: ICONS.liquidity,
+            },
+            {
+              title: 'Exchange',
+              description: 'Use Coinbase Exchange for professional market access.',
+              href: '/institutions',
+              icon: ICONS.exchange,
+            },
+          ],
+        },
+      ],
+    },
   },
   {
-    label: "Developers",
-    href: "/developers",
+    label: 'Developers',
+    href: '/developers',
     dropdown: {
-      columns: [
-        [
-          { title: "Developer Platform", description: "CDP overview", href: "/developers", icon: ICONS.code },
-          { title: "Onramp", description: "Fiat-to-crypto onboarding", href: "/developers", icon: ICONS.dollar },
-          { title: "Wallet SDK", description: "Wallet tooling", href: "/developers", icon: ICONS.smartphone },
-          { title: "Base", description: "Build on Base", href: "/developers", icon: ICONS.layers }
-        ],
-        [
-          { title: "Commerce API", description: "Payments tooling", href: "/developers", icon: ICONS.cpu },
-          { title: "Docs", description: "Documentation hub", href: "/developers", icon: ICONS.book },
-          { title: "Demo apps", description: "CDS Web Example Application", href: "/cds-demo", icon: ICONS.grid }
-        ]
-      ],
       promo: {
-        headline: "Build the future of onchain apps and payments",
-        cta: "Start building",
-        href: "/developers",
-        bgColor: "bg-[#0052FF]",
-        textColor: "text-white",
-        image: navDevelopersImg
-      }
-    }
+        eyebrow: 'Developer',
+        headline: 'Build onchain products',
+        cta: 'Start building',
+        href: '/developers',
+        image: navDevelopersImg,
+        imageAlt: 'Coinbase developer products preview',
+      },
+      sections: [
+        {
+          title: 'Platform',
+          items: [
+            {
+              title: 'Developer Platform',
+              description: 'Access APIs, wallets, nodes, and onchain tooling.',
+              href: '/developers',
+              icon: ICONS.platform,
+            },
+            {
+              title: 'Base',
+              description: "Build and scale apps on Coinbase's Ethereum L2.",
+              href: '/developers/base',
+              icon: ICONS.base,
+            },
+            {
+              title: 'Wallet SDK',
+              description: 'Integrate embedded and app-connected wallet flows.',
+              href: '/developers',
+              icon: ICONS.sdk,
+            },
+            {
+              title: 'Onramp',
+              description: 'Bring users onchain with fiat-to-crypto checkout.',
+              href: '/developers',
+              icon: ICONS.onramp,
+            },
+          ],
+        },
+        {
+          title: 'Resources',
+          items: [
+            {
+              title: 'Commerce API',
+              description: 'Accept crypto payments in apps and online stores.',
+              href: '/developers',
+              icon: ICONS.api,
+            },
+            {
+              title: 'Docs',
+              description: 'Read technical documentation and implementation guides.',
+              href: '/developers',
+              icon: ICONS.docs,
+            },
+            {
+              title: 'Demo apps',
+              description: 'Explore working examples built with Coinbase tools.',
+              href: '/cds-demo',
+              icon: ICONS.demos,
+            },
+          ],
+        },
+      ],
+    },
   },
   {
-    label: "Company",
-    href: "/company",
+    label: 'Company',
+    href: '/company',
     dropdown: {
-      columns: [
-        [
-          { title: "About", description: "Powering the crypto economy", href: "/company", icon: ICONS.users },
-          { title: "Careers", description: "Work with us", href: "/company", icon: ICONS.briefcase },
-          { title: "Affiliates", description: "Help introduce the world to crypto", href: "/company", icon: ICONS.heart }
-        ],
-        [
-          { title: "Support", description: "Find answers to your questions", href: "/company", icon: ICONS.help },
-          { title: "Blog", description: "Read the latest from Coinbase", href: "/company", icon: ICONS.coffee },
-          { title: "Security", description: "The most trusted & secure", href: "/company", icon: ICONS.lock }
-        ]
-      ],
       promo: {
-        headline: "Learn all about Coinbase:\nWe're building the open financial system.",
-        cta: "Create your account",
-        href: "/signup",
-        bgColor: "bg-[#0052FF]",
-        textColor: "text-white",
-        image: navCompanyImg
-      }
-    }
-  }
+        eyebrow: 'Company',
+        headline: 'Learn all about Coinbase',
+        cta: 'Create account',
+        href: '/signup',
+        image: navCompanyImg,
+        imageAlt: 'Coinbase company preview',
+      },
+      sections: [
+        {
+          title: 'About Coinbase',
+          items: [
+            {
+              title: 'About',
+              description: 'Learn about our mission and company story.',
+              href: '/company/about',
+              icon: ICONS.about,
+            },
+            {
+              title: 'Careers',
+              description: 'Explore opportunities to build the cryptoeconomy.',
+              href: '/company/careers',
+              icon: ICONS.careers,
+            },
+            {
+              title: 'Affiliates',
+              description: 'Partner with Coinbase and grow your audience.',
+              href: '/company',
+              icon: ICONS.affiliates,
+            },
+          ],
+        },
+        {
+          title: 'Resources',
+          items: [
+            {
+              title: 'Support',
+              description: 'Get product help, guides, and account assistance.',
+              href: '/support',
+              icon: ICONS.support,
+            },
+            {
+              title: 'Blog',
+              description: 'Read the latest product, policy, and market updates.',
+              href: '/company',
+              icon: ICONS.blog,
+            },
+            {
+              title: 'Security',
+              description: 'Learn how Coinbase protects people and assets.',
+              href: '/legal',
+              icon: ICONS.security,
+            },
+          ],
+        },
+      ],
+    },
+  },
 ];

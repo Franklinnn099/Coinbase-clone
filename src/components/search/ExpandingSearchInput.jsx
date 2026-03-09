@@ -13,13 +13,13 @@ const ExpandingSearchInput = forwardRef(({ value, onChange, onClear, isExpanded,
 
   return (
     <motion.div
-      initial={{ width: 36, opacity: 0 }}
+      initial={{ width: 40, opacity: 0 }}
       animate={{ 
-        width: isExpanded ? 360 : 36, 
+        width: isExpanded ? 360 : 40, 
         opacity: isExpanded ? 1 : 0 
       }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className={`relative h-9 rounded-full bg-[#f3f5f7] flex items-center overflow-hidden border border-transparent focus-within:border-[#0052FF] transition-colors ${
+      className={`relative h-10 rounded-full bg-[#F1F3F5] flex items-center overflow-hidden border border-transparent focus-within:border-[#0052FF] transition-colors ${
         !isExpanded ? 'pointer-events-none' : ''
       }`}
     >
