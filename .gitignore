@@ -14,9 +14,33 @@ dist-ssr
 
 # Editor directories and files
 .idea
+.vscode
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.staging
+
+# Netlify
+.netlify
+
+# Secrets & credentials
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+credentials.json
+serviceAccountKey.json
+
+# OS files
+Thumbs.db
