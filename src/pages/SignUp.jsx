@@ -43,6 +43,7 @@ const SignUp = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <p className="text-red-500 text-xs mt-2 font-medium">Demo app – do not use your real password</p>
       </div>
 
       {/* Continue button */}

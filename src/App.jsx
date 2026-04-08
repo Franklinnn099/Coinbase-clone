@@ -22,19 +22,22 @@ import Legal from './pages/Legal';
 import CdsViteApp from './pages/CdsViteApp';
 import About from './pages/About';
 import './App.css';
+import WarningBanner from './components/layout/WarningBanner';
+import FooterDisclaimer from './components/layout/FooterDisclaimer';
 
 function MarketingLayout() {
   return (
     <div className="flex flex-col min-h-screen bg-white font-sans text-[#0A0B0D]">
+      <WarningBanner />
       <Navbar />
       <main className="grow">
         <Outlet />
       </main>
       <Footer />
+      <FooterDisclaimer />
     </div>
   );
 }
-
 function App() {
   return (
     <Router>
