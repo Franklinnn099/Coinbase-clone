@@ -1,4 +1,13 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/fcRde9Vj)
+
+<div align="center">
+  <h1>🚨 IMPORTANT DISCLAIMER 🚨</h1>
+  <h3><strong>THIS IS A STUDENT PROJECT DEMONSTRATION BUILT FOR EDUCATIONAL PURPOSES ONLY.</strong></h3>
+  <h3><strong>IT IS NOT AFFILIATED WITH, ENDORSED BY, OR SPONSORED BY COINBASE.</strong></h3>
+  <h3><strong>THIS IS NOT A REAL APPLICATION. DO NOT ENTER ANY REAL PERSONAL, FINANCIAL, OR LOGIN INFORMATION.</strong></h3>
+  <br />
+</div>
+
 # Coinbase Clone - React & Tailwind CSS Assignment
 
 ## 📋 Overview
