@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthLayout from '../components/auth/AuthLayout';
 import AuthInput from '../components/auth/AuthInput';
 import PrimaryButton from '../components/auth/PrimaryButton';
 import DividerWithText from '../components/auth/DividerWithText';
 import SocialAuthButton from '../components/auth/SocialAuthButton';
 import AuthFooterText from '../components/auth/AuthFooterText';
+import { useAuth, API } from '../context/AuthContext';
 
-/* Icon components for social buttons */
 const PasskeyIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -32,16 +33,52 @@ const AppleIcon = () => (
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    setError('');
+    if (!email || !password) {
+      setError('Please enter your email and password.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || 'Login failed. Please try again.');
+        return;
+      }
+
+      login(data.user);
+      navigate('/');
+    } catch {
+      setError('Unable to connect to the server. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <AuthLayout>
-      {/* Heading */}
       <h1 className="text-2xl sm:text-3xl font-bold text-white mb-8">
         Sign in to Coinbase
       </h1>
 
-      {/* Email input */}
-      <div className="mb-6">
+      <div className="mb-4">
         <AuthInput
           label="Email"
           type="email"
@@ -49,18 +86,30 @@ const SignIn = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <p className="text-red-500 text-xs mt-2 font-medium">Demo app – do not use your real password</p>
       </div>
 
-      {/* Continue button */}
-      <PrimaryButton>Continue</PrimaryButton>
+      <div className="mb-6">
+        <AuthInput
+          label="Password"
+          type="password"
+          placeholder="Your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
 
-      {/* Divider */}
+      {error && (
+        <p className="text-red-400 text-sm mb-4">{error}</p>
+      )}
+
+      <PrimaryButton onClick={handleSubmit} disabled={submitting}>
+        {submitting ? 'Signing in…' : 'Continue'}
+      </PrimaryButton>
+
       <div className="my-7">
         <DividerWithText />
       </div>
 
-      {/* Social sign-in buttons */}
       <div className="flex flex-col gap-3">
         <SocialAuthButton icon={<PasskeyIcon />}>
           Sign in with Passkey
@@ -73,7 +122,6 @@ const SignIn = () => {
         </SocialAuthButton>
       </div>
 
-      {/* Footer */}
       <AuthFooterText
         text="Don't have an account?"
         linkText="Sign up"

@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiGlobe, FiMenu, FiX } from 'react-icons/fi';
-import { Link, useLocation } from 'react-router-dom';
+import { FiGlobe, FiMenu, FiUser, FiX } from 'react-icons/fi';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { DEFAULT_ACTIVE_NAV, navData } from '../../data/navData';
+import { useAuth } from '../../context/AuthContext';
 import GlobalSearch from '../search/GlobalSearch';
 import ActionButton from './navbar/ActionButton';
 import CoinbaseMark from './navbar/CoinbaseMark';
@@ -30,6 +31,8 @@ const Navbar = () => {
   const [desktopOpen, setDesktopOpen] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const activeItem = useMemo(
     () => navData.find((item) => item.label === desktopOpen) ?? null,
@@ -45,6 +48,12 @@ const Navbar = () => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       closeDesktopMenu();
     }
+  };
+
+  const handleLogout = async () => {
+    closeMobileMenu();
+    await logout();
+    navigate('/');
   };
 
   return (
@@ -95,21 +104,42 @@ const Navbar = () => {
                 icon={<FiGlobe size={18} />}
               />
 
-              <ActionButton
-                className="hidden lg:inline-flex"
-                to="/signin"
-                variant="secondary"
-              >
-                Sign in
-              </ActionButton>
-
-              <ActionButton
-                className="hidden lg:inline-flex"
-                to="/signup"
-                variant="primary"
-              >
-                Sign up
-              </ActionButton>
+              {user ? (
+                <>
+                  <ActionButton
+                    className="hidden lg:inline-flex"
+                    to="/profile"
+                    variant="secondary"
+                    icon={<FiUser size={16} />}
+                  >
+                    {user.name.split(' ')[0]}
+                  </ActionButton>
+                  <ActionButton
+                    className="hidden lg:inline-flex"
+                    onClick={handleLogout}
+                    variant="primary"
+                  >
+                    Sign out
+                  </ActionButton>
+                </>
+              ) : (
+                <>
+                  <ActionButton
+                    className="hidden lg:inline-flex"
+                    to="/signin"
+                    variant="secondary"
+                  >
+                    Sign in
+                  </ActionButton>
+                  <ActionButton
+                    className="hidden lg:inline-flex"
+                    to="/signup"
+                    variant="primary"
+                  >
+                    Sign up
+                  </ActionButton>
+                </>
+              )}
 
               <ActionButton
                 ariaLabel={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -160,12 +190,25 @@ const Navbar = () => {
                 </div>
 
                 <div className="mt-6 grid gap-3">
-                  <ActionButton onClick={closeMobileMenu} to="/signin" variant="secondary">
-                    Sign in
-                  </ActionButton>
-                  <ActionButton onClick={closeMobileMenu} to="/signup" variant="primary">
-                    Sign up
-                  </ActionButton>
+                  {user ? (
+                    <>
+                      <ActionButton onClick={closeMobileMenu} to="/profile" variant="secondary">
+                        My Profile
+                      </ActionButton>
+                      <ActionButton onClick={handleLogout} variant="primary">
+                        Sign out
+                      </ActionButton>
+                    </>
+                  ) : (
+                    <>
+                      <ActionButton onClick={closeMobileMenu} to="/signin" variant="secondary">
+                        Sign in
+                      </ActionButton>
+                      <ActionButton onClick={closeMobileMenu} to="/signup" variant="primary">
+                        Sign up
+                      </ActionButton>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -21,9 +21,12 @@ import Wallet from './pages/Wallet';
 import Legal from './pages/Legal';
 import CdsViteApp from './pages/CdsViteApp';
 import About from './pages/About';
+import Profile from './pages/Profile';
 import './App.css';
 import WarningBanner from './components/layout/WarningBanner';
 import FooterDisclaimer from './components/layout/FooterDisclaimer';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
 
 function MarketingLayout() {
   return (
@@ -38,38 +41,51 @@ function MarketingLayout() {
     </div>
   );
 }
+
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Dedicated CDS sandbox area */}
-        <Route path="/cds-demo" element={<CdsViteApp />} />
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Dedicated CDS sandbox area */}
+          <Route path="/cds-demo" element={<CdsViteApp />} />
 
-        {/* Auth pages — standalone dark layout, no Navbar/Footer */}
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUpAccountType />} />
-        <Route path="/signup/create" element={<SignUp />} />
+          {/* Auth pages — standalone dark layout, no Navbar/Footer */}
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUpAccountType />} />
+          <Route path="/signup/create" element={<SignUp />} />
 
-        {/* Global Marketing Site */}
-        <Route element={<MarketingLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/individuals" element={<Individuals />} />
-          <Route path="/individuals/wallet" element={<Wallet />} />
-          <Route path="/businesses" element={<Businesses />} />
-          <Route path="/institutions" element={<Institutions />} />
-          <Route path="/developers" element={<Developers />} />
-          <Route path="/developers/base" element={<Base />} />
-          <Route path="/company" element={<Company />} />
-          <Route path="/company/about" element={<About />} />
-          <Route path="/company/careers" element={<Careers />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/legal" element={<Legal />} />
-          <Route path="/asset/:id" element={<AssetDetail />} />
-          <Route path="/learn" element={<Learn />} />
-        </Route>
-      </Routes>
-    </Router>
+          {/* Global Marketing Site */}
+          <Route element={<MarketingLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/individuals" element={<Individuals />} />
+            <Route path="/individuals/wallet" element={<Wallet />} />
+            <Route path="/businesses" element={<Businesses />} />
+            <Route path="/institutions" element={<Institutions />} />
+            <Route path="/developers" element={<Developers />} />
+            <Route path="/developers/base" element={<Base />} />
+            <Route path="/company" element={<Company />} />
+            <Route path="/company/about" element={<About />} />
+            <Route path="/company/careers" element={<Careers />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/legal" element={<Legal />} />
+            <Route path="/asset/:id" element={<AssetDetail />} />
+            <Route path="/learn" element={<Learn />} />
+
+            {/* Protected */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

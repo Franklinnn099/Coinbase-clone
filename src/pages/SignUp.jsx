@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthLayout from '../components/auth/AuthLayout';
 import AuthInput from '../components/auth/AuthInput';
 import PrimaryButton from '../components/auth/PrimaryButton';
 import DividerWithText from '../components/auth/DividerWithText';
 import SocialAuthButton from '../components/auth/SocialAuthButton';
 import AuthFooterText from '../components/auth/AuthFooterText';
+import { useAuth, API } from '../context/AuthContext';
 
 const GoogleIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24">
@@ -22,11 +24,53 @@ const AppleIcon = () => (
 );
 
 const SignUp = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    setError('');
+    if (!name || !email || !password) {
+      setError('All fields are required.');
+      return;
+    }
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || 'Registration failed. Please try again.');
+        return;
+      }
+
+      login(data.user);
+      navigate('/');
+    } catch {
+      setError('Unable to connect to the server. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <AuthLayout>
-      {/* Heading */}
       <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
         Create your account
       </h1>
@@ -34,8 +78,17 @@ const SignUp = () => {
         Access all that Coinbase has to offer with a single account.
       </p>
 
-      {/* Email input */}
-      <div className="mb-6">
+      <div className="mb-4">
+        <AuthInput
+          label="Full name"
+          type="text"
+          placeholder="Your full name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+
+      <div className="mb-4">
         <AuthInput
           label="Email"
           type="email"
@@ -43,18 +96,30 @@ const SignUp = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <p className="text-red-500 text-xs mt-2 font-medium">Demo app – do not use your real password</p>
       </div>
 
-      {/* Continue button */}
-      <PrimaryButton>Continue</PrimaryButton>
+      <div className="mb-6">
+        <AuthInput
+          label="Password"
+          type="password"
+          placeholder="Create a password (min. 6 characters)"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
 
-      {/* Divider */}
+      {error && (
+        <p className="text-red-400 text-sm mb-4">{error}</p>
+      )}
+
+      <PrimaryButton onClick={handleSubmit} disabled={submitting}>
+        {submitting ? 'Creating account…' : 'Continue'}
+      </PrimaryButton>
+
       <div className="my-7">
         <DividerWithText />
       </div>
 
-      {/* Social sign-up buttons */}
       <div className="flex flex-col gap-3">
         <SocialAuthButton icon={<GoogleIcon />}>
           Sign up with Google
@@ -64,7 +129,6 @@ const SignUp = () => {
         </SocialAuthButton>
       </div>
 
-      {/* Footer */}
       <AuthFooterText
         text="Already have an account?"
         linkText="Sign in"
