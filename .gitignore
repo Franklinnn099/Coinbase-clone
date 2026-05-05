@@ -44,3 +44,6 @@ serviceAccountKey.json
 
 # OS files
 Thumbs.db
+
+# Claude
+.claude
